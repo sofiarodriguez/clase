@@ -11,88 +11,95 @@ produces:
   - application/json
 
 paths:
-  /users:
+  /zones:
     get:
       tags:
-        - users
-      summary: get all users (search)
-      x-swagger-router-controller: users.search
+        - zones
+      summary: get all zones (search)
+      x-swagger-router-controller: zones.search
       parameters:
         - name: q
           in: query
           required: false
           type: string
           description: search inside email and fname and lname
+        - name: limit
+          in: query
+          required: false
+          type: integer
+          description: limit for page
+        - name: page
+          in: query
+          required: false
+          type: integer
+          description: page
+
 
       responses:
         '200':
-          description: users list
+          description: zones list
           schema:
-            $ref: '#/definitions/user'
+            $ref: '#/definitions/zone'
 
     put:
       tags:
-        - users
-      summary: insert user
-      x-swagger-router-controller: users.insert
+        - zones
+      summary: insert zone
+      x-swagger-router-controller: zones.insert
       parameters:
-        - name: user
+        - name: zone
           in: body
           required: true
           schema:
-            $ref: '#/definitions/user'
+            $ref: '#/definitions/zone'
 
       responses:
         '200':
-          description: users added
+          description: zones added
           schema:
-            $ref: '#/definitions/user'
-
-
-
-  /server/time:
-    get:
+            $ref: '#/definitions/zone'
+    delete:
       tags:
-        - hours
-      summary: the local server time
-      x-swagger-router-controller: server.time
-      responses:
-        '200':
-          description: the local server time answer
-
-  /about:
-    get:
-      tags:
-        - about
-      summary: About this API
-      x-swagger-router-controller: about.about
+        - zones
+      summary: delete zone
+      x-swagger-router-controller: zones.remove
       parameters:
-        - name: name
+        - name: _id
           in: query
-          required: false
+          required: true
           type: string
+
       responses:
         '200':
-          description: About
+          description: zones
           schema:
-            $ref: '#/definitions/about'
+            $ref: '#/definitions/zone'
+    patch:
+      tags:
+        - zones
+      summary: patch zone
+      x-swagger-router-controller: zones.update
+      parameters:
+        - name: zone
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/zone'
+
+      responses:
+        '200':
+          description: zones
+          schema:
+            $ref: '#/definitions/zone'
 
 
 definitions:
-  user:
+  zone:
     type: object
     properties:
-      fname:
+      description:
         type: string
-      lname:
+      code:
         type: string
-      email:
-        type: string
-
-  about:
-    type: object
-    properties:
-      version:
-        type: string
-      name:
+      _id:
         type: string

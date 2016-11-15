@@ -76,7 +76,8 @@ function makeControllers(main) {
 	let controllers = {
 		'about': require("./about")(main),
 		'server': require('./server')(main),
-		'users': require('./users')(main)
+		'users': require('./users')(main),
+		'zones': require('./zone')(main)
 	};
 
 
@@ -84,7 +85,11 @@ function makeControllers(main) {
 		'about.about_get': controllers.about.about,
 		'server.time_get': controllers.server.time,
 		'users.search_get': controllers.users.search,
-		'users.insert_put': controllers.users.insert
+		'users.insert_put': controllers.users.insert,
+		'zones.search_get': controllers.zones.search,
+		'zones.insert_put': controllers.zones.insert,
+		'zones.remove_delete': controllers.zones.remove,
+		'zones.update_patch': controllers.zones.update
 	}, main.announce);
 }
 

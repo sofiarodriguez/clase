@@ -20,6 +20,7 @@ const mongojs = require('mongojs');
 const redisSentinel = require('redis-sentinel');
 const redis = require('redis');
 const Users  = require('./lib/Users');
+const Zones  = require('./lib/Zones');
 
 /**
  * Build the main application
@@ -217,6 +218,7 @@ app.prototype.libs = function () {
 		self.main.libs.http = http;
 		self.main.libs.moment = moment;
 		self.main.libs.users = new Users(self.main);
+		self.main.libs.zones = new Zones(self.main);
 
 		resolve(self.main.libs);
 	});
